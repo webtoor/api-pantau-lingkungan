@@ -78,12 +78,13 @@ $app->singleton(
 |
 */
 
-// $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
-// $app->register(App\Providers\EventServiceProvider::class);
+ $app->register(App\Providers\AppServiceProvider::class);
+ $app->register(App\Providers\AuthServiceProvider::class);
+ $app->register(App\Providers\EventServiceProvider::class);
+// Lumen Generator
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 
-\Dusterio\LumenPassport\LumenPassport::routes($this->app);
+\Dusterio\LumenPassport\LumenPassport::routes($app->router);
 
 // Finally register two service providers - original one and Lumen adapter
 $app->register(Laravel\Passport\PassportServiceProvider::class);
