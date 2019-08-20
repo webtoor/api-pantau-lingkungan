@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateKategoriLaporanTable extends Migration
+class CreateDesaKelurahanTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateKategoriLaporanTable extends Migration
      */
     public function up()
     {
-        Schema::create('kategori_laporan', function (Blueprint $table) {
+        Schema::create('desa_kelurahans', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('kategori_name');
+            $table->string('nama_kelurahan');
         });
     }
 
@@ -26,6 +26,6 @@ class CreateKategoriLaporanTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kategori_laporan');
+        Schema::dropIfExists('desa_kelurahans');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLaporanTable extends Migration
+class CreateRfKategoriLaporansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateLaporanTable extends Migration
      */
     public function up()
     {
-        Schema::create('laporan', function (Blueprint $table) {
+        Schema::create('rf_kategori_laporans', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('kategori_id')->unsigned();
-            $table->string('user_id')->unsigned();
-            $table->timestamps();
+            $table->string('kategori_name');
         });
     }
 
@@ -28,6 +26,6 @@ class CreateLaporanTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('laporan');
+        Schema::dropIfExists('rf_kategori_laporans');
     }
 }
