@@ -40,12 +40,12 @@ class AuthController extends Controller
         return response()->json([
             'status' => 'berhasil',
             'message' => 'Berhasil membuat akun!'
-            ], 201);
+            ]);
         }else{
             return response()->json([
             'status' => 'gagal',
             'message' => 'Gagal membuat akun!'
-            ], 400);
+            ]);
         }
 
     }

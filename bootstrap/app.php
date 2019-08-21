@@ -25,6 +25,8 @@ $app = new Laravel\Lumen\Application(
 
  $app->withEloquent();
 
+ $app->configure('cors');
+
  $app->configure('auth');
 
 /*
@@ -63,6 +65,10 @@ $app->singleton(
 //     App\Http\Middleware\ExampleMiddleware::class
 // ]);
 
+$app->middleware([
+    \Barryvdh\Cors\HandleCors::class,
+]);
+
  $app->routeMiddleware([
      'auth' => App\Http\Middleware\Authenticate::class,
  ]);
@@ -81,14 +87,18 @@ $app->singleton(
  $app->register(App\Providers\AppServiceProvider::class);
  $app->register(App\Providers\AuthServiceProvider::class);
  $app->register(App\Providers\EventServiceProvider::class);
-// Lumen Generator
-$app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 
-\Dusterio\LumenPassport\LumenPassport::routes($app->router);
+ //Laravel CORS
+ $app->register(Barryvdh\Cors\ServiceProvider::class);
 
-// Finally register two service providers - original one and Lumen adapter
-$app->register(Laravel\Passport\PassportServiceProvider::class);
-$app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
+ // Lumen Generator
+ $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
+
+ \Dusterio\LumenPassport\LumenPassport::routes($app->router);
+
+ // Finally register two service providers - original one and Lumen adapter
+ $app->register(Laravel\Passport\PassportServiceProvider::class);
+ $app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes
