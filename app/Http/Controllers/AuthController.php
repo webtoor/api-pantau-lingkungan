@@ -54,5 +54,7 @@ class AuthController extends Controller
             'email' => 'required:email',
             'password' => 'required'
         ]);
+    
+        
     }
 }
