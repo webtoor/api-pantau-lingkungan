@@ -50,11 +50,60 @@ class AuthController extends Controller
 
     }
     public function login(Request $request){
+
         $this->validate($request, [
             'email' => 'required:email',
             'password' => 'required'
         ]);
-    
-        
+        global $app; 
+
+        $email = $request->json('email');
+        $password = $request->json('password');
+        $user_role = '1';
+
+        $resultUser = User::where('email', $email)->first();
+            if(!$resultUser){
+                // Email not exist 
+                return response()->json([
+                    "error" => "invalid_credentials",
+                    "message" => "The user credentials were incorrect"
+                   ]);
+            }
+            if(Hash::check($password, $resultUser->password) ) {
+
+                // Email && Password exist + Check user_role
+                if(($user_role) == ($resultUser->role->role_id)){
+
+                $params = [
+                    'grant_type'=>'password',
+                    'client_id' => '1',
+                    'client_secret'=> 'goFARpNfWmFPutzH4ZQXiw0e5Lj2iyd69yF83W7A',
+                    'username'  => $email,
+                    'password'  => $password,
+                    'scope'     => '*'
+                ];
+                
+                $proxy = Request::create('/oauth/token','post', $params);
+                $response = $app->dispatch($proxy);
+                $json = (array) json_decode($response->getContent());
+                $json['id'] = $resultUser->id;
+                $json['email'] = $resultUser->email;
+                return $response->setContent(json_encode($json)); 
+
+                }else{
+                    // != User role
+                    return response()->json([
+                     "error" => "invalid_credentials",
+                     "message" => "The user credentials were incorrect"
+                    ]);
+                }
+            }else{
+                //Email exist, Password not exist
+                return response()->json([
+                    "error" => "invalid_credentials",
+                    "message" => "The user credentials were incorrect"
+                   ]);
+            } 
+
     }
 }
