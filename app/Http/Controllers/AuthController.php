@@ -14,11 +14,11 @@ class AuthController extends Controller
             'namaDepan' => 'required|string',
             'namaBelakang' => 'required|string',
             'email'    => 'required|email|unique:users',
-            'noHp' => 'required|numeric|min:10',
+            'jenisKelamin' => 'required',
+            'noHp' => 'required|numeric|min:10|unique:users',
             'alamat' => 'required',
             'password' => 'required|string|min:5|confirmed',
         ]);  
-
        $results_user = User::create([
             'namaDepan' => $request->json('namaDepan'),
             'namaBelakang' => $request->json('namaBelakang'),
@@ -36,12 +36,12 @@ class AuthController extends Controller
 
       if($results_user && $results_role){
         return response()->json([
-            'status' => '1',
+            'status' => 'berhasil',
             'message' => 'Berhasil membuat akun!'
             ]);
         }else{
             return response()->json([
-            'status' => '0',
+            'status' => 'gagal',
             'message' => 'Gagal membuat akun!'
             ]);
         }
