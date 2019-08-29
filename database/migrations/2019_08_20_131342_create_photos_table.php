@@ -18,7 +18,6 @@ class CreatePhotosTable extends Migration
             $table->integer('laporan_id')->unsigned();
             $table->string('photo');
             $table->foreign('laporan_id')->references('id')->on('laporans')->onDelete('cascade');
-
         });
     }
 
