@@ -11,24 +11,22 @@ class AuthController extends Controller
 {
     public function register(Request $request){
         $this->validate($request, [
-            'firstname' => 'required|string',
-            'lastname' => 'required|string',
+            'namaDepan' => 'required|string',
+            'namaBelakang' => 'required|string',
             'email'    => 'required|email|unique:users',
-            'phone_number' => 'required|numeric|min:10',
+            'noHp' => 'required|numeric|min:10',
+            'alamat' => 'required',
             'password' => 'required|string|min:5|confirmed',
-            'alamat' => 'required'
         ]);  
 
        $results_user = User::create([
-            'firstname' => $request->json('firstname'),
-            'lastname' => $request->json('lastname'),
+            'namaDepan' => $request->json('namaDepan'),
+            'namaBelakang' => $request->json('namaBelakang'),
             'email' => $request->json('email'),
-            'phone_number' => $request->json('phone_number'),
-            'gender' => $request->json('gender'),
-            'dob' => $request->json('dob'),
+            'noHp' => $request->json('noHp'),
+            'jenisKelamin' => $request->json('jenisKelamin'),
             'alamat' => $request->json('alamat'),
             'password' => Hash::make($request->json('password')),
-
         ]);
 
       $results_role = User_role::create([
@@ -38,12 +36,12 @@ class AuthController extends Controller
 
       if($results_user && $results_role){
         return response()->json([
-            'status' => 'berhasil',
+            'status' => '1',
             'message' => 'Berhasil membuat akun!'
             ]);
         }else{
             return response()->json([
-            'status' => 'gagal',
+            'status' => '0',
             'message' => 'Gagal membuat akun!'
             ]);
         }
