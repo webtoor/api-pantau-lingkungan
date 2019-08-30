@@ -8,7 +8,8 @@ class Laporan extends Model
 {
     protected $table = 'laporans';
     protected $fillable = [
-        'user_id', 'kategori_id', 'namaPerusahaan', 'deskripsiLaporan', 'desaKelurahan', 'kecamatan', 'kotaKabupaten', 'provinsi'
+        'user_id', 'kategori_id', 'namaPerusahaan', 'deskripsiLaporan', 'desaKelurahan', 'kecamatan', 'kotaKabupaten', 'provinsi',  'created_at',
+        'updated_at'
     ];
 
 }

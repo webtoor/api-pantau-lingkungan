@@ -10,16 +10,16 @@ class UserController extends Controller
     public function createLaporan(Request $request){
          // Validate
          $this->validate($request, [
-            'user_id' => 'required|string',
+            'user_id' => 'required',
             'judul' => 'required|string',
             'kategori' => 'required',
             'deskripsiLaporan' => 'required'
            ]);
 
-           $result_laporan = Laporan::create([
+          $result_laporan = Laporan::create([
             'user_id' => $request->json('user_id'),
             'judul' => $request->json('judul'),
-            'kategori' => $request->json('kategori'),
+            'kategori_id' => $request->json('kategori'),
             'deskripsiLaporan' => $request->json('deskripsiLaporan'),
             'namaPerusahaan' => $request->json('namaPerusahaan'),
             'desaKelurahan' => $request->json('desaKelurahan'),
@@ -31,12 +31,12 @@ class UserController extends Controller
            if($result_laporan){
             return response()->json([
                 'status' => 'berhasil',
-                'message' => 'Berhasil membuat akun!'
+                'message' => 'Sukses mengirim laporan!'
                 ]);
             }else{
                 return response()->json([
                 'status' => 'gagal',
-                'message' => 'Gagal membuat akun!'
+                'message' => 'Sukses mengirim laporan!'
                 ]);
             }
     }
