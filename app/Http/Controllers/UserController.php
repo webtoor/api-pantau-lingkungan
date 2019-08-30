@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Laporan;
+use App\Location;
 
 class UserController extends Controller
 {
@@ -26,6 +27,14 @@ class UserController extends Controller
             'kecamatan' => $request->json('kecamatan'),
             'kotaKabupaten' => $request->json('kotaKabupaten'),
             'provinsi' => $request->json('provinsi'),
+           ]);
+
+           $result_location = Location::create([
+               'laporan_id' => $result_laporan->id,
+               'latitude' => $request->json('latitude'),
+               'longitude' => $request->json('longitude'),
+               'altitude' => $request->json('altitude'),
+               'accuracy' => $request->json('accuracy'),
            ]);
 
            if($result_laporan){
