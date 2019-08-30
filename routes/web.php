@@ -19,7 +19,6 @@ $router->post('login', ['uses' => 'AuthController@login']);
 
 $router->group(['prefix' => 'api/v1', 'middleware' => ['auth:api']], function () use ($router) {
     $router->group(['prefix' => 'user'], function () use ($router) {
-
-    $router->post('laporan', ['uses' => 'UserController@createLaporan']);
+    $router->post('lapor', ['uses' => 'UserController@createLaporan']);
     });
 });
