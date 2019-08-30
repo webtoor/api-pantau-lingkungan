@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function postLaporan(Request $request){
+    public function createLaporan(Request $request){
        return response()->json($request);
     }
 }
