@@ -97,9 +97,12 @@ class UserController extends Controller
     }
 
     public function readFile(){
+        $data = Storage::disk('public')->get('file.txt');
+        var_dump($data);
+
         //$data = Storage::disk('public')->get('image_1567429473Lcng6Oz059.png');
 
-       $url = "http://localhost/pantau/storage/app/public/image_1567429473Lcng6Oz059.png";
+        $url = "http://localhost/pantau/storage/app/public/image_1567429473Lcng6Oz059.png";
         return "<img src='".$url."'/>";
       
         return response()->json(['error' => false, 'url' => $url]);
