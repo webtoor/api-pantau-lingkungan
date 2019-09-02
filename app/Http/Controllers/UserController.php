@@ -14,7 +14,10 @@ class UserController extends Controller
             'user_id' => 'required',
             'judul' => 'required|string',
             'kategori' => 'required',
-            'deskripsiLaporan' => 'required'
+            'deskripsiLaporan' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
+            'accuracy' => 'required'
            ]);
 
           $result_laporan = Laporan::create([
@@ -37,14 +40,14 @@ class UserController extends Controller
                'accuracy' => $request->json('accuracy'),
            ]);
 
-           if($result_laporan){
+           if($result_laporan && $result_location){
             return response()->json([
-                'status' => 'berhasil',
+                'status' => '1',
                 'message' => 'Sukses mengirim laporan!'
                 ]);
             }else{
                 return response()->json([
-                'status' => 'gagal',
+                'status' => '0',
                 'message' => 'Sukses mengirim laporan!'
                 ]);
             }
