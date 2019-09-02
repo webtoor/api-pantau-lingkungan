@@ -29,6 +29,10 @@ $app = new Laravel\Lumen\Application(
 
  $app->configure('auth');
 
+ $app->configure('filesystem');
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings
@@ -99,6 +103,9 @@ $app->middleware([
  // Finally register two service providers - original one and Lumen adapter
  $app->register(Laravel\Passport\PassportServiceProvider::class);
  $app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
+
+/*  $app->register(Illuminate\Filesystem\FilesystemServiceProvider::class); */
+
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes
