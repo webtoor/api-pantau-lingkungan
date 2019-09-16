@@ -14,13 +14,6 @@ class UserController extends Controller
 {
     public function createLaporan(Request $request){
          // Validate
-     
-             $image = $request->json('img');
-             $image = str_replace('data:image/jpeg;base64,', '', $image);
-             $image = str_replace(' ', '+', $image);         
-             $imageName = 'image_'.time().str_random(10).'.png';
-             Storage::disk('public')->put($imageName, base64_decode($image));     
-    
 
          $this->validate($request, [
             'user_id' => 'required',
@@ -31,7 +24,19 @@ class UserController extends Controller
             'longitude' => 'required',
             'accuracy' => 'required'
            ]);
-
+           
+           $image = $request->json('img');
+           $image = str_replace('data:image/jpeg;base64,', '', $image);
+           $image = str_replace(' ', '+', $image);         
+           $imageName = 'image_'.time().str_random(10).'.png';
+           $results_store = Storage::disk('public')->put($imageName, base64_decode($image)); 
+            
+           if(!$results_store){
+            return response()->json([
+                'status' => '0',
+                'message' => 'Gagal Upload Image, Silahkan coba lagi nanti :('
+                ]);           
+             }
           $result_laporan = Laporan::create([
             'user_id' => $request->json('user_id'),
             'judul' => $request->json('judul'),
@@ -52,6 +57,8 @@ class UserController extends Controller
                'accuracy' => $request->json('accuracy'),
            ]);
 
+           
+
            $result_photo = Photo::create([
              'laporan_id' => $result_laporan->id,
              'photo' => $imageName,
@@ -65,28 +72,14 @@ class UserController extends Controller
             }else{
                 return response()->json([
                 'status' => '0',
-                'message' => 'Sukses mengirim laporan!'
+                'message' => 'Gagal mengirim laporan!'
                 ]);
             }
     }
 
     public function showImage($image_name){
-    /*     echo 'Hello world';
-        Storage::disk('public')->put('file.txt','Hello world'); */
+  
      return view('showImage');
-/* 
-       $path = storage_path('app/' . 'image_15674207359iGE8T6nE2.png');
-
-    if (!File::exists($path)) {
-        return 404;
-    }
-
-    $type = File::mimeType($path);
-    $headers = array('Content-Type' => $type);
-    $response = response()->download($path, $photo, $headers);
-    ob_end_clean();
-    return $response; */
-
    
     }
 
