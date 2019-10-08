@@ -25,11 +25,7 @@ $app = new Laravel\Lumen\Application(
 
  $app->withEloquent();
 
- $app->configure('cors');
 
- $app->configure('auth');
-
- $app->configure('filesystem');
 
 
 
@@ -53,6 +49,12 @@ $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
     App\Console\Kernel::class
 );
+
+$app->configure('cors');
+
+$app->configure('auth');
+
+//$app->configure('filesystem');
 
 /*
 |--------------------------------------------------------------------------

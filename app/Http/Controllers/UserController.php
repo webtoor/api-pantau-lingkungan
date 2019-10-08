@@ -14,8 +14,8 @@ class UserController extends Controller
 {
     public function createLaporan(Request $request){
          // Validate
-
-         $this->validate($request, [
+       
+           $this->validate($request, [
             'user_id' => 'required',
             'judul' => 'required|string',
             'kategori' => 'required',
@@ -25,11 +25,11 @@ class UserController extends Controller
             'accuracy' => 'required'
            ]);
            
-           $image = $request->json('img');
-           $image = str_replace('data:image/jpeg;base64,', '', $image);
-           $image = str_replace(' ', '+', $image);         
-           $imageName = 'image_'.time().str_random(10).'.png';
-           $results_store = Storage::disk('public')->put($imageName, base64_decode($image)); 
+            $image = $request->json('img');
+            $image = str_replace('data:image/jpeg;base64,', '', $image);
+            $image = str_replace(' ', '+', $image);         
+            $imageName = 'image_'.time().str_random(10).'.png';
+            $results_store = Storage::disk('public')->put($imageName, base64_decode($image)); 
             
            if(!$results_store){
             return response()->json([
@@ -37,6 +37,7 @@ class UserController extends Controller
                 'message' => 'Gagal Upload Image, Silahkan coba lagi nanti :('
                 ]);           
              }
+           
           $result_laporan = Laporan::create([
             'user_id' => $request->json('user_id'),
             'judul' => $request->json('judul'),
@@ -47,6 +48,7 @@ class UserController extends Controller
             'kecamatan' => $request->json('kecamatan'),
             'kotaKabupaten' => $request->json('kotaKabupaten'),
             'provinsi' => $request->json('provinsi'),
+            'status_id' => $request->json('status_id')
            ]);
 
            $result_location = Location::create([

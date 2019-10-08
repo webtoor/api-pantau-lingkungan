@@ -12,7 +12,9 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    //return $router->app->version();
+    $mytime = Carbon\Carbon::now();
+echo $mytime->toDateTimeString();
 });
 $router->get('testfile',[ 'uses' => 'UserController@writeFile'
 ]);
@@ -25,7 +27,7 @@ $router->get('storage/{image_name}',['uses' => 'UserController@showImage']);
 
 $router->post('register', ['uses' => 'AuthController@register']);
 $router->post('login', ['uses' => 'AuthController@login']);
-
+$router->get('logout', ['uses' => 'AuthController@logout']);
 
 $router->group(['prefix' => 'api/v1', 'middleware' => ['auth:api']], function () use ($router) {
     $router->group(['prefix' => 'user'], function () use ($router) {

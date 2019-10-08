@@ -9,11 +9,11 @@ return [
     | to accept any value.
     |
     */
-   'supportsCredentials' => true,
-   'allowedOrigins' => ['*'],
-   'allowedHeaders' => ['*'],
-   'allowedMethods' => ['*'], // ex: ['GET', 'POST', 'PUT',  'DELETE']
-   'exposedHeaders' => [],
-   'maxAge' => 0,
+    'supportsCredentials' => true,
+    'allowedOrigins' => ['*'],
+    'allowedHeaders' => ['*'],
+    'allowedMethods' => ['GET', 'POST', 'OPTIONS', 'PUT'], // ex: ['GET', 'POST', 'PUT',  'DELETE']
+    'exposedHeaders' => [],
+    'maxAge' => 86400 ,
 ];
 ?>

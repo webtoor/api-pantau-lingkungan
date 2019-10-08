@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLaporanStatusTable extends Migration
+class CreateRfLaporanStatusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateLaporanStatusTable extends Migration
      */
     public function up()
     {
-        Schema::create('laporan_status', function (Blueprint $table) {
+        Schema::create('rf_laporan_status', function (Blueprint $table) {
             $table->increments('id');
             $table->string('status');
         });
@@ -26,6 +26,6 @@ class CreateLaporanStatusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('laporan_status');
+        Schema::dropIfExists('rf_laporan_status');
     }
 }

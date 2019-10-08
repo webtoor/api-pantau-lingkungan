@@ -23,7 +23,7 @@ class CreateLaporansTable extends Migration
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('kategori_id')->references('id')->on('rf_kategori_laporans')->onDelete('cascade');
-            $table->foreign('status_id')->references('id')->on('laporan_status')->onDelete('cascade');
+            $table->foreign('status_id')->references('id')->on('rf_laporan_status')->onDelete('cascade');
         });
     }
 
