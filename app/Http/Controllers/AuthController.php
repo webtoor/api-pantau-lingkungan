@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\User;
 use App\User_role;
 
@@ -104,4 +106,19 @@ class AuthController extends Controller
             } 
 
     }
+
+    public function logout(){
+        $accessToken = Auth::user()->token();
+             DB::table('oauth_refresh_tokens')
+                 ->where('access_token_id', $accessToken->id)
+                 ->update(['revoked' => true]);
+             DB::table('oauth_refresh_tokens')
+                 ->where('access_token_id', $accessToken->id)
+                 ->delete();
+                 $accessToken->revoke();
+                 $accessToken->delete();
+         return response()->json([
+             'success' => '1',
+             'message' => 'Berhasil logout']);
+     }
 }
